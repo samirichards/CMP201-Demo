@@ -321,7 +321,7 @@ namespace CMP201Demo {
                     txt_output->Text += "Found " + txt_needle->Text + " at the following indexes:\n";
 
                     for (auto item : *indexes) {
-                        txt_output->Text += (item.ToString() + " \n");
+                        txt_output->Text += (item + " \n");
                         if (mnu_selectionEnabled->Checked)
                         {
                             rTxt_haystack->SelectionStart = item;
