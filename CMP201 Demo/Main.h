@@ -58,6 +58,7 @@ namespace CMP201Demo {
     private: System::Windows::Forms::MenuStrip^ menuStrip1;
     private: System::Windows::Forms::ToolStripMenuItem^ toolStripMenuItem1;
     private: System::Windows::Forms::ToolStripMenuItem^ mnu_selectionEnabled;
+    private: System::Windows::Forms::ToolStripMenuItem^ mnu_openConsole;
 
 
 
@@ -88,6 +89,7 @@ namespace CMP201Demo {
             this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
             this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->mnu_selectionEnabled = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->mnu_openConsole = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->groupBox1->SuspendLayout();
             this->groupBox2->SuspendLayout();
             this->menuStrip1->SuspendLayout();
@@ -116,7 +118,7 @@ namespace CMP201Demo {
             // 
             this->textBox1->BackColor = System::Drawing::SystemColors::Control;
             this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->textBox1->Location = System::Drawing::Point(10, 659);
+            this->textBox1->Location = System::Drawing::Point(10, 646);
             this->textBox1->Multiline = true;
             this->textBox1->Name = L"textBox1";
             this->textBox1->ReadOnly = true;
@@ -133,7 +135,7 @@ namespace CMP201Demo {
             this->txt_output->Name = L"txt_output";
             this->txt_output->ReadOnly = true;
             this->txt_output->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-            this->txt_output->Size = System::Drawing::Size(201, 472);
+            this->txt_output->Size = System::Drawing::Size(201, 459);
             this->txt_output->TabIndex = 5;
             // 
             // btn_search
@@ -213,7 +215,10 @@ namespace CMP201Demo {
             // menuStrip1
             // 
             this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-            this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->toolStripMenuItem1 });
+            this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+                this->toolStripMenuItem1,
+                    this->mnu_openConsole
+            });
             this->menuStrip1->Location = System::Drawing::Point(0, 0);
             this->menuStrip1->Name = L"menuStrip1";
             this->menuStrip1->Size = System::Drawing::Size(982, 28);
@@ -233,8 +238,16 @@ namespace CMP201Demo {
             this->mnu_selectionEnabled->CheckOnClick = true;
             this->mnu_selectionEnabled->CheckState = System::Windows::Forms::CheckState::Checked;
             this->mnu_selectionEnabled->Name = L"mnu_selectionEnabled";
-            this->mnu_selectionEnabled->Size = System::Drawing::Size(224, 26);
+            this->mnu_selectionEnabled->Size = System::Drawing::Size(219, 26);
             this->mnu_selectionEnabled->Text = L"Highlight Selection";
+            // 
+            // mnu_openConsole
+            // 
+            this->mnu_openConsole->Enabled = false;
+            this->mnu_openConsole->Name = L"mnu_openConsole";
+            this->mnu_openConsole->Size = System::Drawing::Size(119, 24);
+            this->mnu_openConsole->Text = L"Console Mode";
+            this->mnu_openConsole->Click += gcnew System::EventHandler(this, &Main::mnu_openConsole_Click);
             // 
             // Main
             // 
@@ -276,8 +289,9 @@ namespace CMP201Demo {
             //Then maybe add console mode for pure performance
             //Regardless of the last step being done at some point do some performance measures and 
             //put them in a powerpoint
-
-            this->SuspendLayout();
+            
+            rTxt_haystack->SuspendLayout();
+            txt_output->SuspendLayout();
             rTxt_haystack->SelectAll();
             rTxt_haystack->SelectionBackColor = System::Windows::Forms::Control::DefaultBackColor;
             rTxt_haystack->DeselectAll();
@@ -317,10 +331,14 @@ namespace CMP201Demo {
                     }
                 }
             }
+            txt_output->ResumeLayout();
             rTxt_haystack->DeselectAll();
-            this->ResumeLayout(false);
+            rTxt_haystack->ResumeLayout();
             indexes->clear();
             delete indexes;
         }
+private: System::Void mnu_openConsole_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }
