@@ -101,6 +101,9 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <Profile>true</Profile>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -110,6 +113,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

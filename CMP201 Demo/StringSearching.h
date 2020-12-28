@@ -28,14 +28,12 @@ void getSkip(std::string *pattern) {
 /// <param name="haystack">The text to be searched</param>
 /// <param name="needle">The text being searched for within the haystack</param>
 /// <returns></returns>
-std::list<int> bmSearch(std::string *haystack, std::string *needle) {
-    std::list<int> indexes;
+void bmSearch(std::string *haystack, std::string *needle, std::list<int>* indexes) {
     getSkip(needle);
     auto needle_length = needle->length();
     auto haystack_length = haystack->length();
+    int temp = 0;
 
-    skip;
-    in_pattern;
     if (needle_length <= haystack_length) {
         for (size_t i = 0; i < haystack_length - needle_length + 1; i++) {
             int s = skip[int(haystack->data()[i + needle_length - 1])];
@@ -43,18 +41,22 @@ std::list<int> bmSearch(std::string *haystack, std::string *needle) {
                 i += s - 1; // Skip forwards.
                 continue;
             }
+            temp = 0;
             for (size_t j = 0; j < needle_length; j++) {
                 if (tolower(haystack->data()[i + j]) != tolower(needle->data()[j]) ||
                     toupper(haystack->data()[i + j]) != toupper(needle->data()[j])) {
                     break;
                 } else {
-                    indexes.push_back(i);
-                    break;
+                    temp++;
+                }
+                if (temp == needle_length)
+                {
+                    indexes->push_back(i);
                 }
             }
         }
     }
-    return indexes;
+    return;
 }
 
 /// <summary>
@@ -100,10 +102,10 @@ std::string toLowerString(std::string input) {
 /// <param name="haystack">The text to be searched</param>
 /// <param name="needle">The text being searched for within the haystack</param>
 /// <returns></returns>
-std::list<int> rkSearch(std::string *haystack, std::string *needle) {
-    std::list<int> indexes;
-    if (needle->length() > haystack->length()) {
-        return indexes;
+void rkSearch(std::string *haystack, std::string *needle, std::list<int> *indexes) {
+    indexes->clear();
+    if (needle->length() > haystack->length() || needle->length() == 0) {
+        return;
     }
     auto needle_length = needle->length();
     auto haystack_length = haystack->length();
@@ -115,9 +117,9 @@ std::list<int> rkSearch(std::string *haystack, std::string *needle) {
         }
         if (currentHash == needleHash) {
             if (toLowerString(haystack->substr(i, needle_length)) == toLowerString(*needle)) {
-                indexes.push_back(i);
+                indexes->push_back(i);
             }
         }
     }
-    return indexes;
+    return;
 }
