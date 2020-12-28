@@ -39,6 +39,9 @@ void bmSearch(std::string* haystack, std::string* needle, std::list<int>* indexe
                 continue;
             }
             temp = 0;
+            //Check each letter to see if it is a match
+            //Break if any letter does not match
+            //If number of matches equals the length of the needle then the word has been found, add it's index to the list
             for (size_t j = 0; j < needle_length; j++) {
                 if (tolower(haystack->data()[i + j]) != tolower(needle->data()[j]) ||
                     toupper(haystack->data()[i + j]) != toupper(needle->data()[j])) {
