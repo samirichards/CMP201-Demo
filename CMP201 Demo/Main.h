@@ -76,6 +76,7 @@ namespace CMP201Demo {
         /// the contents of this method with the code editor.
         /// </summary>
         void InitializeComponent(void) {
+            System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Main::typeid));
             this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
             this->textBox1 = (gcnew System::Windows::Forms::TextBox());
             this->txt_output = (gcnew System::Windows::Forms::TextBox());
@@ -204,6 +205,7 @@ namespace CMP201Demo {
                 | System::Windows::Forms::AnchorStyles::Left)
                 | System::Windows::Forms::AnchorStyles::Right));
             this->rTxt_haystack->AutoWordSelection = true;
+            this->rTxt_haystack->BackColor = System::Drawing::SystemColors::Control;
             this->rTxt_haystack->DetectUrls = false;
             this->rTxt_haystack->HideSelection = false;
             this->rTxt_haystack->Location = System::Drawing::Point(6, 21);
@@ -221,7 +223,7 @@ namespace CMP201Demo {
             });
             this->menuStrip1->Location = System::Drawing::Point(0, 0);
             this->menuStrip1->Name = L"menuStrip1";
-            this->menuStrip1->Size = System::Drawing::Size(982, 28);
+            this->menuStrip1->Size = System::Drawing::Size(982, 30);
             this->menuStrip1->TabIndex = 3;
             this->menuStrip1->Text = L"menuStrip1";
             // 
@@ -251,17 +253,16 @@ namespace CMP201Demo {
             // 
             // Main
             // 
-            this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-            this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+            this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
             this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
             this->ClientSize = System::Drawing::Size(982, 753);
             this->Controls->Add(this->groupBox2);
             this->Controls->Add(this->groupBox1);
             this->Controls->Add(this->menuStrip1);
+            this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
             this->MainMenuStrip = this->menuStrip1;
             this->MaximizeBox = false;
             this->Name = L"Main";
-            this->ShowIcon = false;
             this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"CMP 201 Demo";
@@ -305,10 +306,10 @@ namespace CMP201Demo {
                     for (int item : *indexes) {
                         txt_output->Text += (item.ToString() + " \n");
                         if (mnu_selectionEnabled->Checked)
-                        {
+                        {                    
+                            rTxt_haystack->SelectionBackColor = System::Drawing::Color::GreenYellow;
                             rTxt_haystack->SelectionStart = item;
                             rTxt_haystack->SelectionLength = txt_needle->TextLength;
-                            rTxt_haystack->SelectionBackColor = System::Drawing::Color::GreenYellow;
                         }
                     }
                 }
@@ -323,10 +324,10 @@ namespace CMP201Demo {
                     for (auto item : *indexes) {
                         txt_output->Text += (item + " \n");
                         if (mnu_selectionEnabled->Checked)
-                        {
+                        {                    
+                            rTxt_haystack->SelectionBackColor = System::Drawing::Color::Yellow;
                             rTxt_haystack->SelectionStart = item;
                             rTxt_haystack->SelectionLength = txt_needle->TextLength;
-                            rTxt_haystack->SelectionBackColor = System::Drawing::Color::Yellow;
                         }
                     }
                 }

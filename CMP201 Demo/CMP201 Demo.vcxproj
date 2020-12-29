@@ -147,7 +147,7 @@
     <ResourceCompile Include="CMP201 Demo.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\icon.ico" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
