@@ -25,7 +25,7 @@ void getSkip(std::string* pattern) {
 /// <param name="haystack">The text to be searched</param>
 /// <param name="needle">The text being searched for within the haystack</param>
 /// <returns></returns>
-void  bmSearch(std::string* haystack, std::string* needle, std::list<int>* indexes) {
+void bmSearch(std::string* haystack, std::string* needle, std::list<int>* indexes) {
     getSkip(needle);
     auto needle_length = needle->length();
     auto haystack_length = haystack->length();

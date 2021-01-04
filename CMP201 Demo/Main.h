@@ -3,6 +3,11 @@
 #include <list>
 #include "StringSearching.h"
 #include <msclr\marshal_cppstd.h>
+#include <chrono>
+#include <Richedit.h>
+
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
 
 namespace CMP201Demo {
 
@@ -102,15 +107,15 @@ namespace CMP201Demo {
                 | System::Windows::Forms::AnchorStyles::Left)
                 | System::Windows::Forms::AnchorStyles::Right));
             this->groupBox1->Controls->Add(this->textBox1);
+            this->groupBox1->Controls->Add(this->txt_needle);
+            this->groupBox1->Controls->Add(this->label2);
             this->groupBox1->Controls->Add(this->txt_output);
             this->groupBox1->Controls->Add(this->btn_search);
-            this->groupBox1->Controls->Add(this->label2);
             this->groupBox1->Controls->Add(this->label1);
-            this->groupBox1->Controls->Add(this->txt_needle);
             this->groupBox1->Controls->Add(this->Cmb_SearchSelect);
             this->groupBox1->Location = System::Drawing::Point(755, 31);
             this->groupBox1->Name = L"groupBox1";
-            this->groupBox1->Size = System::Drawing::Size(215, 710);
+            this->groupBox1->Size = System::Drawing::Size(549, 710);
             this->groupBox1->TabIndex = 1;
             this->groupBox1->TabStop = false;
             this->groupBox1->Text = L"Controls";
@@ -119,11 +124,11 @@ namespace CMP201Demo {
             // 
             this->textBox1->BackColor = System::Drawing::SystemColors::Control;
             this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-            this->textBox1->Location = System::Drawing::Point(10, 646);
+            this->textBox1->Location = System::Drawing::Point(303, 640);
             this->textBox1->Multiline = true;
             this->textBox1->Name = L"textBox1";
             this->textBox1->ReadOnly = true;
-            this->textBox1->Size = System::Drawing::Size(199, 64);
+            this->textBox1->Size = System::Drawing::Size(240, 64);
             this->textBox1->TabIndex = 6;
             this->textBox1->Text = L"Please note: Execution of the algorithm is actually pretty fast, the only reason "
                 L"this is slow is that it is drawn synchronously";
@@ -131,20 +136,20 @@ namespace CMP201Demo {
             // 
             // txt_output
             // 
-            this->txt_output->Location = System::Drawing::Point(9, 181);
+            this->txt_output->Location = System::Drawing::Point(303, 97);
             this->txt_output->Multiline = true;
             this->txt_output->Name = L"txt_output";
             this->txt_output->ReadOnly = true;
             this->txt_output->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-            this->txt_output->Size = System::Drawing::Size(201, 459);
+            this->txt_output->Size = System::Drawing::Size(246, 537);
             this->txt_output->TabIndex = 5;
             // 
             // btn_search
             // 
             this->btn_search->Enabled = false;
-            this->btn_search->Location = System::Drawing::Point(8, 152);
+            this->btn_search->Location = System::Drawing::Point(303, 68);
             this->btn_search->Name = L"btn_search";
-            this->btn_search->Size = System::Drawing::Size(201, 23);
+            this->btn_search->Size = System::Drawing::Size(246, 23);
             this->btn_search->TabIndex = 4;
             this->btn_search->Text = L"Search";
             this->btn_search->UseVisualStyleBackColor = true;
@@ -153,7 +158,7 @@ namespace CMP201Demo {
             // label2
             // 
             this->label2->AutoSize = true;
-            this->label2->Location = System::Drawing::Point(7, 82);
+            this->label2->Location = System::Drawing::Point(6, 18);
             this->label2->Name = L"label2";
             this->label2->Size = System::Drawing::Size(53, 17);
             this->label2->TabIndex = 3;
@@ -162,7 +167,7 @@ namespace CMP201Demo {
             // label1
             // 
             this->label1->AutoSize = true;
-            this->label1->Location = System::Drawing::Point(6, 31);
+            this->label1->Location = System::Drawing::Point(300, 18);
             this->label1->Name = L"label1";
             this->label1->Size = System::Drawing::Size(159, 17);
             this->label1->TabIndex = 2;
@@ -170,11 +175,11 @@ namespace CMP201Demo {
             // 
             // txt_needle
             // 
-            this->txt_needle->Location = System::Drawing::Point(8, 102);
-            this->txt_needle->MaxLength = 96;
+            this->txt_needle->Location = System::Drawing::Point(9, 38);
+            this->txt_needle->MaxLength = 512;
             this->txt_needle->Multiline = true;
             this->txt_needle->Name = L"txt_needle";
-            this->txt_needle->Size = System::Drawing::Size(201, 44);
+            this->txt_needle->Size = System::Drawing::Size(288, 666);
             this->txt_needle->TabIndex = 1;
             // 
             // Cmb_SearchSelect
@@ -182,9 +187,9 @@ namespace CMP201Demo {
             this->Cmb_SearchSelect->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
             this->Cmb_SearchSelect->FormattingEnabled = true;
             this->Cmb_SearchSelect->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Boyer-Moore", L"Rabin-Karp" });
-            this->Cmb_SearchSelect->Location = System::Drawing::Point(8, 51);
+            this->Cmb_SearchSelect->Location = System::Drawing::Point(303, 38);
             this->Cmb_SearchSelect->Name = L"Cmb_SearchSelect";
-            this->Cmb_SearchSelect->Size = System::Drawing::Size(201, 24);
+            this->Cmb_SearchSelect->Size = System::Drawing::Size(246, 24);
             this->Cmb_SearchSelect->TabIndex = 0;
             this->Cmb_SearchSelect->SelectionChangeCommitted += gcnew System::EventHandler(this, &Main::Cmb_SearchSelect_SelectionChangeCommitted);
             // 
@@ -210,7 +215,7 @@ namespace CMP201Demo {
             this->rTxt_haystack->HideSelection = false;
             this->rTxt_haystack->Location = System::Drawing::Point(6, 21);
             this->rTxt_haystack->Name = L"rTxt_haystack";
-            this->rTxt_haystack->Size = System::Drawing::Size(725, 683);
+            this->rTxt_haystack->Size = System::Drawing::Size(725, 689);
             this->rTxt_haystack->TabIndex = 0;
             this->rTxt_haystack->Text = L"";
             // 
@@ -223,7 +228,7 @@ namespace CMP201Demo {
             });
             this->menuStrip1->Location = System::Drawing::Point(0, 0);
             this->menuStrip1->Name = L"menuStrip1";
-            this->menuStrip1->Size = System::Drawing::Size(982, 30);
+            this->menuStrip1->Size = System::Drawing::Size(1316, 28);
             this->menuStrip1->TabIndex = 3;
             this->menuStrip1->Text = L"menuStrip1";
             // 
@@ -255,7 +260,7 @@ namespace CMP201Demo {
             // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
             this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-            this->ClientSize = System::Drawing::Size(982, 753);
+            this->ClientSize = System::Drawing::Size(1316, 753);
             this->Controls->Add(this->groupBox2);
             this->Controls->Add(this->groupBox1);
             this->Controls->Add(this->menuStrip1);
@@ -290,53 +295,75 @@ namespace CMP201Demo {
             //Then maybe add console mode for pure performance
             //Regardless of the last step being done at some point do some performance measures and 
             //put them in a powerpoint
-            
+
+
+            auto clock = new std::chrono::steady_clock;
+
             rTxt_haystack->SuspendLayout();
             txt_output->SuspendLayout();
             rTxt_haystack->SelectAll();
             rTxt_haystack->SelectionBackColor = System::Windows::Forms::Control::DefaultBackColor;
             rTxt_haystack->DeselectAll();
             std::list<int> *indexes = new std::list<int>;
+
+            std::chrono::steady_clock::time_point algoEnd;
+            std::chrono::steady_clock::time_point drawEnd;
+            std::chrono::steady_clock::time_point startTime = clock->now();
+
             if (Cmb_SearchSelect->SelectedIndex == 0) {
                 bmSearch(&msclr::interop::marshal_as<std::string>(rTxt_haystack->Text),
                                     &msclr::interop::marshal_as<std::string>(txt_needle->Text), indexes);
+                algoEnd = clock->now();
                 txt_output->Text = "Using " + Cmb_SearchSelect->SelectedItem + " Search Algorithm\n\n";
                 if (indexes->size()) {
                     txt_output->Text += "Found " + txt_needle->Text + " at the following indexes:\n";
+                    std::string outputTemp = "";
+
                     for (int item : *indexes) {
-                        txt_output->Text += (item.ToString() + " \n");
+                        outputTemp.append(std::to_string(item).append(" \n"));
                         if (mnu_selectionEnabled->Checked)
                         {                    
                             rTxt_haystack->SelectionBackColor = System::Drawing::Color::GreenYellow;
                             rTxt_haystack->SelectionStart = item;
                             rTxt_haystack->SelectionLength = txt_needle->TextLength;
                         }
+                        txt_output->Text += gcnew String(outputTemp.c_str());
                     }
                 }
             }
             if (Cmb_SearchSelect->SelectedIndex == 1) {
                 rkSearch(&msclr::interop::marshal_as<std::string>(rTxt_haystack->Text),
                                     &msclr::interop::marshal_as<std::string>(txt_needle->Text), indexes);
+                algoEnd = clock->now();
                 txt_output->Text = "Using " + Cmb_SearchSelect->SelectedItem + " Search Algorithm\n\n";
                 if (indexes->size()) {
                     txt_output->Text += "Found " + txt_needle->Text + " at the following indexes:\n";
+                    std::string outputTemp = "";
 
                     for (auto item : *indexes) {
-                        txt_output->Text += (item + " \n");
+                        outputTemp.append(std::to_string(item).append(" \n"));
                         if (mnu_selectionEnabled->Checked)
-                        {                    
+                        {
                             rTxt_haystack->SelectionBackColor = System::Drawing::Color::Yellow;
                             rTxt_haystack->SelectionStart = item;
                             rTxt_haystack->SelectionLength = txt_needle->TextLength;
                         }
                     }
+                    txt_output->Text += gcnew String(outputTemp.c_str());
                 }
             }
+
             txt_output->ResumeLayout();
             rTxt_haystack->DeselectAll();
             rTxt_haystack->ResumeLayout();
+            drawEnd = clock->now();
+
+            txt_output->Text = "Search finished in " + duration_cast<milliseconds>(algoEnd - startTime).count() + "ms \n"
+                + "Draw finished in " + (duration_cast<milliseconds>(drawEnd - startTime).count() - duration_cast<milliseconds>(algoEnd - startTime).count()) + "ms \n" + txt_output->Text;
+
             indexes->clear();
             delete indexes;
+            delete clock;
         }
 private: System::Void mnu_openConsole_Click(System::Object^ sender, System::EventArgs^ e) {
 
