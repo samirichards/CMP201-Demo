@@ -5,6 +5,8 @@
 #include <msclr\marshal_cppstd.h>
 #include <chrono>
 #include <Richedit.h>
+#include <iostream>
+#include <fstream>
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -356,6 +358,26 @@ namespace CMP201Demo {
 
 			txt_output->Text = "Search finished in " + duration_cast<milliseconds>(algoEnd - startTime).count() + "ms \n"
 				+ "Draw finished in " + (duration_cast<milliseconds>(drawEnd - startTime).count() - duration_cast<milliseconds>(algoEnd - startTime).count()) + "ms \n" + txt_output->Text;
+
+			std::ofstream file;			
+			file.open("./output.txt", std::ios::app);
+			if (!file.fail())
+			{
+				file << "Search on text size " << rTxt_haystack->TextLength << " for " << msclr::interop::marshal_as<std::string>(txt_needle->Text).c_str() << " found " << indexes.size() << " instances, took " << duration_cast<milliseconds>(algoEnd - startTime).count() << "ms to find, and " << (duration_cast<milliseconds>(drawEnd - startTime).count() - duration_cast<milliseconds>(algoEnd - startTime).count()) << "ms to draw. Using ";
+				if (Cmb_SearchSelect->SelectedIndex == 0)
+				{
+					file << "Boyer-Moore" << std::endl;
+				}
+				else
+				{
+					file << "Rabin-Karp" << std::endl;
+				}
+				file.close();
+			}
+			else
+			{
+				txt_output->Text += "ERROR, UNABLE TO OPEN OUTPUT FILE";
+			}
 			//Display the timing information at the top of the output
 			//Also correct for the order the times were taken
 

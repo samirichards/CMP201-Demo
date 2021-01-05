@@ -1,0 +1,4 @@
+Search on text size 10000 for 006FEE84 found 1 instances, took 10ms to find, and 11ms to draw
+Search on text size 10000 for 005DECB0 found 1 instances, took 10ms to find, and 11ms to draw
+Search on text size 10000 for 001DE810 found 1 instances, took 9ms to find, and 18ms to draw
+Search on text size 10000 for 004FEF30 found 1 instances, took 10ms to find, and 15ms to draw
